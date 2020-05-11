@@ -4,6 +4,7 @@ var router = express.Router();
 var awskey = process.env.AWS_ACCESS_KEY_ID || '';
 var awssecretkey = process.env.AWS_SECRET_ACCESS_KEY || '';
 var awsregion = process.env.AWS_REGION || 'us-east-1';
+var awsbucket = process.env.AWS_BUCKET || '';
 var AWS = require('aws-sdk');
 AWS.config.update({accessKeyId: awskey, secretAccessKey: awssecretkey, region: awsregion});
 var s3 = new AWS.S3();
@@ -40,7 +41,7 @@ function buildImagesListFromS3Data(bucketname, data) {
 router.get('/', function(req, res, next) {
 
   // TODO pull these from ENV vars + user added buckets
-  var bucketIds = ['rhdj2017-selfie-out', 'rhdj2017-selfie-in', 'FakeBucket'];
+  var bucketIds = [awsbucket, 'FakeBucket'];
 
   var imagesArray = [];
   var showBucket = req.query.showBucket;
