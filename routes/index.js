@@ -7,7 +7,7 @@ var awsregion = process.env.AWS_REGION || 'us-east-1';
 var awsbucket = process.env.AWS_BUCKET || '';
 var AWS = require('aws-sdk');
 AWS.config.update({accessKeyId: awskey, secretAccessKey: awssecretkey, region: awsregion});
-var s3 = new AWS.S3();
+var s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
 //var IMAGE_TYPEFILTER = process.env.IMAGE_TYPEFILTER || '.png,.jpg';
 
@@ -62,7 +62,7 @@ router.get('/', function(req, res, next) {
     // query for images
     console.log('querying S3 for objects in ' + showBucket);
     var params = {
-      Bucket: showBucket
+      Bucket : 'danclark-archive',
       //ContinuationToken: 'STRING_VALUE',
       //Delimiter: 'STRING_VALUE',
       //EncodingType: url,
