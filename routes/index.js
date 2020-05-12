@@ -44,7 +44,8 @@ router.get('/', function(req, res, next) {
   var bucketIds = [awsbucket, 'FakeBucket'];
 
   var imagesArray = [];
-  var showBucket = req.query.showBucket;
+  //var showBucket = req.query.showBucket;
+  var showBucket = 'danclark-archive';
   if (!showBucket) { 
     console.log('no bucket, forcing to first bucket');
     showBucket = bucketIds[0]
@@ -62,7 +63,7 @@ router.get('/', function(req, res, next) {
     // query for images
     console.log('querying S3 for objects in ' + showBucket);
     var params = {
-      Bucket : 'danclark-archive',
+      Bucket : showBucket,
       //ContinuationToken: 'STRING_VALUE',
       //Delimiter: 'STRING_VALUE',
       //EncodingType: url,
